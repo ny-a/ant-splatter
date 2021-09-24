@@ -29,7 +29,7 @@
       class AntSplatterApp extends React.Component {
         constructor(props) {
           super(props);
-          this.state = { pos_x: 0, pos_y: 0 };
+          this.state = { pos_x: 0, pos_y: 0, theta: 0 };
         }
 
         componentDidMount() {
@@ -44,16 +44,19 @@
         }
 
         tick() {
+          const new_x = this.state.pos_x + Math.sin(this.state.theta);
+          const new_y = this.state.pos_y + Math.cos(this.state.theta);
           this.setState({
-            pos_x: this.state.pos_x + Math.random() - 0.5,
-            pos_y: this.state.pos_y + Math.random() - 0.5,
+            pos_x: Math.max(0, Math.min(80, new_x)),
+            pos_y: Math.max(0, Math.min(80, new_y)) ,
+            theta: this.state.theta + Math.random() - 0.5,
           })
         }
 
         render() {
           return (
             <div class="container">
-              <span style={{position: 'relative', top: this.state.pos_x, left: this.state.pos_y}}>&#x1F41C;</span><br />
+              <span style={{position: 'relative', top: this.state.pos_x + 'vh', left: this.state.pos_y + 'vw'}}>&#x1F41C;</span><br />
               <span>ぼくは蟻のアリ太郎！繁殖して世界征服するのが夢なんだ！</span>
             </div>
           );
