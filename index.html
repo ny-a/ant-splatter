@@ -29,13 +29,27 @@
       class AntSplatterApp extends React.Component {
         constructor(props) {
           super(props);
-          this.state = { liked: false };
+          this.state = { pos_x: 0, pos_y: 0 };
+        }
+
+        componentDidMount() {
+          this.timerID = setInterval(
+            () => this.tick(),
+            100
+          );
+        }
+
+        tick() {
+          this.setState({
+            pos_x: this.state.pos_x + Math.random() - 0.5,
+            pos_y: this.state.pos_y + Math.random() - 0.5,
+          })
         }
 
         render() {
           return (
             <div class="container">
-              <span>&#x1F41C;</span><br />
+              <span style={{position: 'relative', top: this.state.pos_x, left: this.state.pos_y}}>&#x1F41C;</span><br />
               <span>ぼくは蟻のアリ太郎！繁殖して世界征服するのが夢なんだ！</span>
             </div>
           );
