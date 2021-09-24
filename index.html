@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body {
+        margin: 0;
+      }
+
+      .container {
+        padding: 1em;
+        min-height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <!-- Load our React component. -->
+    <!-- <script src="app.jsx" type="text/babel"></script> -->
+    <script type="text/babel">
+      'use strict';
+
+      class AntSplatterApp extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { liked: false };
+        }
+
+        render() {
+          return (
+            <div class="container">
+              <span>&#x1F41C;</span>
+            </div>
+          );
+        }
+      }
+
+      const domContainer = document.querySelector('#app');
+      ReactDOM.render(<AntSplatterApp />, domContainer);
+
+    </script>
+  </body>
+</html>
