@@ -30,6 +30,10 @@
         constructor(props) {
           super(props);
           this.state = { pos_x: 0, pos_y: 0, theta: 0 };
+          this.max_x = 90;
+          this.max_y = 80;
+
+          this.clickAnt = this.clickAnt.bind(this);
         }
 
         componentDidMount() {
@@ -47,16 +51,24 @@
           const new_x = this.state.pos_x + Math.sin(this.state.theta);
           const new_y = this.state.pos_y + Math.cos(this.state.theta);
           this.setState({
-            pos_x: Math.max(0, Math.min(80, new_x)),
-            pos_y: Math.max(0, Math.min(80, new_y)) ,
+            pos_x: Math.max(0, Math.min(this.max_x, new_x)),
+            pos_y: Math.max(0, Math.min(this.max_y, new_y)),
             theta: this.state.theta + Math.random() - 0.5,
           })
         }
 
+        clickAnt() {
+          this.setState({
+            pos_x: Math.random() * this.max_x,
+            pos_y: Math.random() * this.max_y,
+            theta: Math.random() * Math.PI * 2,
+          });
+        }
+
         render() {
           return (
-            <div class="container">
-              <span style={{position: 'relative', top: this.state.pos_x + 'vh', left: this.state.pos_y + 'vw'}}>&#x1F41C;</span><br />
+            <div className="container">
+              <span style={{position: 'relative', top: this.state.pos_x + 'vh', left: this.state.pos_y + 'vw'}} onClick={this.clickAnt}>&#x1F41C;</span><br />
               <span>ぼくは蟻のアリ太郎！繁殖して世界征服するのが夢なんだ！</span>
             </div>
           );
